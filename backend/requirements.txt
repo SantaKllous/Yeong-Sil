@@ -1,0 +1,8 @@
+Flask
+flask-cors
+gunicorn
+ultralytics
+opencv-python-headless
+numpy
+openai
+python-dotenv
