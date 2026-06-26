@@ -1,11 +1,17 @@
 import cv2
 from ultralytics import YOLO
+import os
 
 # =========================
 # LOAD YOLO MODEL
 # =========================
 
-model = YOLO("yolov8n.pt")
+MODEL_PATH = os.path.join(
+    os.path.dirname(__file__),
+    "yolov8n.pt"
+)
+
+model = YOLO(MODEL_PATH)
 
 # =========================
 # IMPORTANT OBJECTS
