@@ -208,6 +208,18 @@ def ocr_frame():
     return jsonify({
         "message": result
     })
+     
+     
+@app.route("/")
+def home():
+
+    return jsonify({
+
+        "status":"success",
+
+        "message":"Yeong-Sil Backend Running"
+
+    })
         
 if __name__ == "__main__":
     app.run(debug=True)
