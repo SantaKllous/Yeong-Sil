@@ -75,7 +75,7 @@ function LiveCamera({ goBack }) {
       canvas.toDataURL("image/jpeg");
 
     const response = await fetch(
-      "http://yeong-sil-t922.onrender.com/detect-frame",
+      "https://yeong-sil-t922.onrender.com/detect-frame",
       {
         method: "POST",
         headers: {
