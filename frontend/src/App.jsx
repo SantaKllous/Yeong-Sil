@@ -48,7 +48,7 @@ function App() {
     setAssistantState("processing");
 
     const response = await fetch(
-      "http://127.0.0.1:5000/assistant/start"
+      "http://yeong-sil-t922.onrender.com/assistant/start"
     );
 
     const data = await response.json();
@@ -97,7 +97,7 @@ const startListening = () => {
     try {
 
       const response = await fetch(
-        "http://127.0.0.1:5000/assistant/command",
+        "http://yeong-sil-t922.onrender.com/assistant/command",
         {
           method: "POST",
           headers: {

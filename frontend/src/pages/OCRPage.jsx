@@ -73,7 +73,7 @@ const captureFrame = async () => {
     canvas.toDataURL("image/jpeg");
 
   const response = await fetch(
-    "http://127.0.0.1:5000/ocr-frame",
+    "http://yeong-sil-t922.onrender.com/ocr-frame",
     {
       method: "POST",
       headers: {
@@ -144,7 +144,7 @@ setMessage(command);
   // Send both image and command
 
   const response = await fetch(
-    "http://127.0.0.1:5000/ocr-frame",
+    "http://yeong-sil-t922.onrender.com/ocr-frame",
     {
       method: "POST",
       headers: {
