@@ -24,22 +24,26 @@ client = OpenAI(
 # =========================
 
 def ask_ai(question):
+    try:
+        completion = client.chat.completions.create(
+            model="openai/gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are Yeong-Sil, a smart AI assistant for visually impaired individuals. "
+                        "Give short, clear, helpful responses."
+                    )
+                },
+                {
+                    "role": "user",
+                    "content": question
+                }
+            ]
+        )
 
-    completion = client.chat.completions.create(
-        model="openai/gpt-3.5-turbo",
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are Yeong-Sil, a smart AI assistant for visually impaired individuals. "
-                    "Give short, clear, helpful responses."
-                )
-            },
-            {
-                "role": "user",
-                "content": question
-            }
-        ]
-    )
+        return completion.choices[0].message.content
 
-    return completion.choices[0].message.content
+    except Exception as e:
+        print("AI ERROR:", str(e))
+        return f"Assistant error: {str(e)}"

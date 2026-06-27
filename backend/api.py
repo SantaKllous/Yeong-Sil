@@ -48,44 +48,55 @@ def start_assistant():
 @app.route("/assistant/command", methods=["POST"])
 def assistant_command():
 
-    data = request.get_json()
+    try:
 
-    command = data.get("command", "")
+        data = request.get_json()
 
-    print("User said:", command)
+        command = data.get("command", "")
 
-    if "surroundings" in command.lower():
+        print("User said:", command)
 
-        objects = detect_objects()
+        if "surroundings" in command.lower():
 
-        if len(objects) == 0:
+            objects = detect_objects()
+
+            if len(objects) == 0:
+
+                return jsonify({
+                    "status": "success",
+                    "message": "I cannot detect any important objects."
+                })
+
+            response = ""
+
+            for obj in objects:
+
+                response += (
+                    f"There is a {obj['label']} "
+                    f"on your {obj['position']} "
+                    f"approximately {obj['distance']} centimeters away. "
+                )
 
             return jsonify({
                 "status": "success",
-                "message": "I cannot detect any important objects."
+                "message": response
             })
 
-        response = ""
-
-        for obj in objects:
-
-            response += (
-                f"There is a {obj['label']} "
-                f"on your {obj['position']} "
-                f"approximately {obj['distance']} centimeters away. "
-            )
+        response = ask_ai(command)
 
         return jsonify({
             "status": "success",
             "message": response
         })
 
-    response = ask_ai(command)
+    except Exception as e:
 
-    return jsonify({
-        "status": "success",
-        "message": response
-    })
+        print("ASSISTANT ERROR:", str(e))
+
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
 
 # ===================================
 # LIVE CAMERA FRAME DETECTION
