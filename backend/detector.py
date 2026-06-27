@@ -13,6 +13,21 @@ MODEL_PATH = os.path.join(
 
 model = YOLO(MODEL_PATH)
 
+model = None
+
+
+def get_model():
+
+    global model
+
+    if model is None:
+
+        print("Loading YOLO model...")
+
+        model = YOLO(MODEL_PATH)
+
+    return model
+
 # =========================
 # IMPORTANT OBJECTS
 # =========================
@@ -71,7 +86,8 @@ def detect_objects():
     if not ret:
 
         return []
-
+    
+    model = get_model()
     results = model(frame)[0]
 
     frame_width = frame.shape[1]
@@ -144,7 +160,8 @@ def detect_objects():
     return detected_objects
 
 def detect_objects_from_frame(frame):
-
+    
+    model = get_model()
     results = model(frame)[0]
 
     frame_width = frame.shape[1]
